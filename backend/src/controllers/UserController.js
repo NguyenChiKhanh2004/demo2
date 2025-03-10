@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 class UserController {
     async getAllUsers(req, res) {
         try {
-            const Users = await users.getAllUsers();
+            const Users = await User.getAll();
             res.status(200).json(Users);
         } catch (error) {
             res.status(500).json({ message: error.message });
@@ -14,7 +14,7 @@ class UserController {
         try{
             const newUsers = req.body;
             console.log(newUsers);
-            const Users = await users.createUsers(newUsers);
+            const Users = await User.createUser(newUsers);
             res.status(200).json("Users created successfully");
         }
         catch (error) {
