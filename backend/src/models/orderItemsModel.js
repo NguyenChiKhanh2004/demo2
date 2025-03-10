@@ -33,7 +33,7 @@ const updateOrderItems= async (id, updateOrderItems) => {
     return results[0];
 };
 
-const deleteROrderItems= async (id) => {
+const deleteOrderItems= async (id) => {
     const query = 'DELETE FROM order_items WHERE id = ?';
     const [results] = await pool.execute(query, [id]);
     return results;
@@ -49,6 +49,6 @@ module.exports = {
     getAll,
     createOrderItems,
     updateOrderItems,
-    deleteROrderItems,
+    deleteOrderItems,
     getOrderItemsByOrderId
 };

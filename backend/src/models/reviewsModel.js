@@ -32,14 +32,14 @@ const updateReviews = async (id, updateReviews) => {
         is_verified_purchase
     } = updateReviews;
 
-    const query = 'UPDATE reviews SET product_id = ?, user_id = ?, rating = ?, title = ?, comment = ?, is_verified_purchase = ? WHERE review_id = ?';
+    const query = 'UPDATE reviews SET product_id = ?, user_id = ?, rating = ?, title = ?, comment = ?, is_verified_purchase = ? WHERE id = ?';
     const results = await pool.execute(query, [product_id, user_id, rating, title, comment, is_verified_purchase, id]);
     return results[0];
    
 };
 
 const deleteReviews = async (id) => {
-    const query = 'DELETE FROM reviews WHERE review_id = ?';
+    const query = 'DELETE FROM reviews WHERE id = ?';
     const [results] = await pool.execute(query, [id]);
     return results;
 };

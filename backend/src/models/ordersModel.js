@@ -8,7 +8,7 @@ const getAll = async () => {
 }
 
 
-const createROrders= async (newOrder) => {
+const createOrders= async (newOrder) => {
     const {
         user_id,
         order_date,
@@ -60,7 +60,7 @@ const getOrdersByUserId = async (id) => {
 
 module.exports = {
     getAll,
-    createROrders,
+    createOrders,
     updateOrders,
     deleteOrders,
     getOrdersByUserId

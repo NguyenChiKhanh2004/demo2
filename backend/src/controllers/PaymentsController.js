@@ -36,7 +36,7 @@ class PaymentsController {
     async deletePayments(req, res) {
         const { id } = req.params;
                 try {
-                    await Payments.deletePayments(id);
+                    await Payments.deletepayments(id);
                     res.status(200).json({ message: "NewPayments deleted successfully" });
                 } catch (error) {
                     res.status(500).json({ message: error.message });
