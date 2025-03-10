@@ -11,6 +11,10 @@ router.get('/', productVariantController.getAllVariants);
 // [POST] localhost:3000/productVariants
 router.post('/', productVariantController.createVariant);
 
+//Lấy chi tiết sản phẩm theo id
+// [GET] localhost:3000/productVariants/:id
+router.get('/:id', productVariantController.getVariantById);
+
 // Cập nhật biến thể sản phẩm
 // [PUT] localhost:3000/productVariants/:id
 router.put('/:id', productVariantController.updateVariant);

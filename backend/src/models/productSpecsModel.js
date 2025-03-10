@@ -66,7 +66,15 @@ const deleteSpecs = async (id) => {
     return results;
 };
 
+const getSpecsByID = async (id) => {
+    const query = 'SELECT * FROM product_specs WHERE id = ?';
+    const [rows] = await pool.execute(query, [id]);
+    return rows[0];
+};
+
+
 module.exports = {
+    getSpecsByID,
     getAll,
     createSpecs,
     updateSpecs,

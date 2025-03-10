@@ -10,7 +10,7 @@ class ProductSpecsController {
             res.status(500).json({ message: error.message });
         }
     }
-    
+
     async createSpecs(req, res) {
         const newSpecs = req.body;
         try {
@@ -20,7 +20,7 @@ class ProductSpecsController {
             res.status(500).json({ message: error.message });
         }
     }
-    
+
     async updateSpecs(req, res) {
         const { id } = req.params;
         const updatedSpecs = req.body;
@@ -31,12 +31,25 @@ class ProductSpecsController {
             res.status(500).json({ message: error.message });
         }
     }
-    
+
     async deleteSpecs(req, res) {
         const { id } = req.params;
         try {
             await ProductSpecs.deleteSpecs(id);
             res.status(200).json({ message: "Product specs deleted successfully" });
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    }
+    async getSpecsByID(req, res) {
+
+        const { id } = req.params;
+        try {
+            const product = await ProductSpecs.getSpecsByID(id);
+            if (!product) {
+                return res.status(404).json({ message: "Product not found" });
+            }
+            res.status(200).json(product);
         } catch (error) {
             res.status(500).json({ message: error.message });
         }

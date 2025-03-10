@@ -37,7 +37,15 @@ const deleteWarehouse = async (id) => {
     return results;
 };
 
+const getWarehouseById = async (id) => {
+    const query = 'SELECT * FROM warehouse_stock WHERE id = ?';
+    const [rows] = await pool.execute(query, [id]);
+    return rows[0];
+};
+
+
 module.exports = {
+    getWarehouseById,
     getAll,
     createWarehouse,
     checkWarehouse,

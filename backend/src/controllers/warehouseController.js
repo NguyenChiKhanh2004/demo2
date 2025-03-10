@@ -51,6 +51,20 @@ class WarehouseController {
             res.status(500).json({ message: error.message });
         }
     }
+    async getWarehouseById(req, res) {
+        const { id } = req.params;
+        try {
+            const warehouse = await Warehouse.getWarehouseById(id);
+            if (!warehouse) {
+                return res.status(404).json({ message: "Kho hàng không tồn tại" });
+            }
+
+            res.status(200).json(warehouse); // Trả về thông tin kho hàng nếu tìm thấy
+        } catch (error) {
+            res.status(500).json({ message: error.message }); // Bắt lỗi và trả về 500
+        }
+    }
+
 }
 
 module.exports = new WarehouseController();

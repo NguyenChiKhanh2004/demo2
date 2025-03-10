@@ -6,6 +6,12 @@ const warehouseController = require('../controllers/warehouseController');
 // [GET] localhost:3000/warehouse
 router.get('/', warehouseController.getAllWarehouse);
 
+
+// Lấy chi tiết kho hàng theo ID
+// [GET] localhost:3000/warehouse/:id
+router.get('/:id', warehouseController.getWarehouseById);
+
+
 // Thêm kho hàng mới
 // [POST] localhost:3000/warehouse
 router.post('/', warehouseController.createWarehouse);

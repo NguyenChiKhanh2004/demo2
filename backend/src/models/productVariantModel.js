@@ -36,6 +36,12 @@ const updateVariant = async (id, updatedVariant) => {
     const [results] = await pool.execute(query, values);
     return results;
 };
+const getProductById = async (id) => {
+    const query = 'SELECT * FROM product_variants WHERE id = ?';
+    const [rows] = await pool.execute(query, [id]);
+    return rows[0];
+};
+
 
 const deleteVariant = async (id) => {
     const query = 'DELETE FROM product_variants WHERE id = ?';
@@ -44,6 +50,7 @@ const deleteVariant = async (id) => {
 };
 
 module.exports = {
+    getProductById,
     getAll,
     createVariant,
     checkVariant,
