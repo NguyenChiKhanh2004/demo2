@@ -33,7 +33,13 @@ const deleteColors =async()=>{
     return rows;
 }
 
+const getColorsById = async (id) => {
+    const query = 'SELECT * FROM colors WHERE id = ?';
+    const [rows] = await pool.execute(query, [id]);
+    return rows[0];
+};
+
 
 module.exports = {
-    getAllColors, createColors, updateColors, deleteColors
+    getAllColors, createColors, updateColors, deleteColors,getColorsById
 };

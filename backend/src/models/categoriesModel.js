@@ -32,7 +32,13 @@ const deleteCategories =async()=>{
     return rows;
 }
 
+const getCategoriesById = async (id) => {
+    const query = 'SELECT * FROM categories WHERE id = ?';
+    const [rows] = await pool.execute(query, [id]);
+    return rows[0];
+};
+
 
 module.exports = {
-    getAllCategories, createCategories, updateCategories, deleteCategories
+    getAllCategories, createCategories, updateCategories, deleteCategories, getCategoriesById
 };

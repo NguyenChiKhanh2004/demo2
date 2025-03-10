@@ -11,6 +11,11 @@ router.get('/', colorsController.getAllColors);
 
 router.post('/', colorsController.createColors);
 
+//lấy colors theo id
+//[GET] localhost:3000/dienthoai/id
+router.get('/:id', colorsController.getColorsById);
+
+
 //[POST] localhost:3000/dienthoai/login
 // router.post('/login', dienthoaiController.login);
 

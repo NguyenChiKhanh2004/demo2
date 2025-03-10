@@ -1,7 +1,5 @@
 const express = require('express');
 const router = express.Router();
-//const userController = require('../controllers/UserController');
-//const dienthoaiController = require('../controllers/dienthoaiController');
 const categoriesController = require('../controllers/categoriesController');
 
 //lấy tất cả danh sách dienthoai
@@ -10,6 +8,10 @@ const categoriesController = require('../controllers/categoriesController');
 router.get('/', categoriesController.getAllCategories);
 
 router.post('/', categoriesController.createCategories);
+
+//lấy categories theo id
+//[GET] localhost:3000/dienthoai/id
+router.get('/:id', categoriesController.getCategoriesById);
 
 //[POST] localhost:3000/dienthoai/login
 // router.post('/login', dienthoaiController.login);

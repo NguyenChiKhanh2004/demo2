@@ -33,7 +33,14 @@ const deleteBrands =async()=>{
     return rows;
 }
 
+const getBrandsById = async (id) => {
+    const query = 'SELECT * FROM brands WHERE id = ?';
+    const [rows] = await pool.execute(query, [id]);
+    return rows[0];
+};
+
+
 
 module.exports = {
-    getAllBrands, createBrands, updateBrands, deleteBrands
+    getAllBrands, createBrands, updateBrands, deleteBrands,getBrandsById
 };

@@ -10,8 +10,11 @@ router.get('/', brandsController.getAllBrands);
 
 router.post('/', brandsController.createBrands);
 
-//[POST] localhost:3000/dienthoai/login
-// router.post('/login', dienthoaiController.login);
+//lấy brand theo id
+//[GET] localhost:3000/dienthoai/id
+router.get('/:id', brandsController.getBrandsById);
+
+
 
 //[PUT]  localhost:3000/dienthoai/id dienthoai
 router.put('/:id',brandsController.updateBrands);

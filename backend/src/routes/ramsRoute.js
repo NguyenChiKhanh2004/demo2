@@ -22,4 +22,9 @@ router.put('/:id',ramsController.updateRams);
 //[DELETE] localhost:3000/dienthoai/id dienthoai
 router.delete('/:id', ramsController.deleteRams);
 
+
+//lấy colors theo id
+//[GET] localhost:3000/dienthoai/id
+router.get('/:id', ramsController.getRamById);
+
 module.exports = router;

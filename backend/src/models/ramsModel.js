@@ -33,7 +33,13 @@ const deleteRams =async()=>{
     return rows;
 }
 
+const getRamsById = async (id) => {
+    const query = 'SELECT * FROM rams WHERE id = ?';
+    const [rows] = await pool.execute(query, [id]);
+    return rows[0];
+};
+
 
 module.exports = {
-    getAllRams, createRams, updateRams, deleteRams
+    getAllRams, createRams, updateRams, deleteRams, getRamsById
 };

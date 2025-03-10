@@ -55,7 +55,21 @@ class RamsController {
       } catch (error) {
         res.status(500).json({ message: error.message });
       }
-    } 
+    }
+    async getRamById(req, res) {
+            try {
+                const { id } = req.params;
+                const brand = await rams.getRamsById(id); // Đổi biến thành `brand` cho đúng số ít
+    
+                if (!brand) {
+                    return res.status(404).json({ message: "Ram not found" });
+                }
+    
+                res.status(200).json(brand);
+            } catch (error) {
+                res.status(500).json({ message: error.message }); // Bắt lỗi và trả về mã lỗi 500
+            }
+        }
     
 }
 

@@ -98,6 +98,22 @@ class UserController {
         }
     }
 
+    async getUsersById (req, res) {
+        try {
+            const { id } = req.params;
+            const user = await User.getUsersById(id);
+    
+            if (!user) {
+                return res.status(404).json({ message: "User not found" });
+            }
+    
+            res.status(200).json(user);
+        } catch (error) {
+            res.status(500).json({ message: error.message }); // Bắt lỗi và trả về 500
+        }
+    };
+    
+
 
 }
 module.exports = new UserController;

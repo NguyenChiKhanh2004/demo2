@@ -23,4 +23,9 @@ router.put('/:id',romsController.updateRoms);
 //[DELETE] localhost:3000/dienthoai/id dienthoai
 router.delete('/:id', romsController.deleteRoms);
 
+//lấy roms theo id
+//[GET] localhost:3000/dienthoai/id
+router.get('/:id', romsController.getRomById);
+
+
 module.exports = router;

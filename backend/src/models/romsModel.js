@@ -33,7 +33,13 @@ const deleteRoms =async()=>{
     return rows;
 }
 
+const getRomById = async (id) => {
+    const query = 'SELECT * FROM roms WHERE id = ?';
+    const [rows] = await pool.execute(query, [id]);
+    return rows[0];
+};
+
 
 module.exports = {
-    getAllRoms, createRoms, updateRoms, deleteRoms
+    getAllRoms, createRoms, updateRoms, deleteRoms, getRomById
 };

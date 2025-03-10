@@ -60,6 +60,22 @@ class BrandsController {
         res.status(500).json({ message: error.message });
     }
     }
+    async getBrandsById(req, res) {
+        try {
+            const { id } = req.params;
+            const brand = await brands.getBrandsById(id); // Đổi biến thành `brand` cho đúng số ít
+    
+            if (!brand) {
+                return res.status(404).json({ message: "Brand not found" });
+            }
+    
+            res.status(200).json(brand);
+        } catch (error) {
+            res.status(500).json({ message: error.message }); // Bắt lỗi và trả về mã lỗi 500
+        }
+    }
+    
+        
     
 }
 

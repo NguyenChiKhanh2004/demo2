@@ -7,6 +7,10 @@ const userController = require('../controllers/UserController');
 // [GET] localhost:3000/user
 router.get('/', userController.getAllUsers);
 
+//lay user theo id
+// [GET] localhost:3000/user
+router.get('/:id', userController.getUsersById);
+
 // [POST] localhost:300/user
 router.post('/', userController.createUsers)
 

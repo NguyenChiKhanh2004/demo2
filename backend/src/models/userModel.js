@@ -38,11 +38,14 @@ const deleteUsers =async()=>{
     return rows;
 }
 
-  
-
-
+const getUsersById = async (id) => {
+    const query = 'SELECT * FROM users WHERE id = ?';
+    const [rows] = await pool.execute(query, [id]);
+    return rows[0];
+};
 
 module.exports = {
+    getUsersById,
     getAll,
     createUsers,
     checkuser,
