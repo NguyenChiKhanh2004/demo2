@@ -12,6 +12,21 @@ class ProductController {
         }
     }
 
+    async getProductsByBrand(req, res) {
+        try {
+            const { brand } = req.body; // Lấy brand từ body JSON
+            if (!brand) {
+                return res.status(400).json({ message: "Vui lòng cung cấp tên hãng sản xuất." });
+            }
+    
+            const products = await Product.getProductByBrand(brand);
+            res.status(200).json(products);
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    }
+    
+
     async createProduct(req, res) {
         const newProduct = req.body;
         try {

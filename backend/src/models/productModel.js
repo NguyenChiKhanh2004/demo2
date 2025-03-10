@@ -32,6 +32,17 @@ const updateProduct = async (id, updatedProduct) => {
     return result;
 };
 
+const getProductByBrand = async (brand) => {
+    const query = `SELECT p.name AS product_name, p.slug, p.description, p.price, b.name AS brand_name
+                    FROM products p
+                    JOIN brands b ON p.brand_id = b.id
+                    WHERE b.name = ? AND p.status = 'active';`;
+    const [rows] = await pool.execute(query, [brand]);
+    return rows; 
+};
+
+
+
 const deleteProduct = async (id) => {
     const query = 'DELETE FROM products WHERE id = ?';
     const [result] = await pool.execute(query, [id]);
@@ -39,6 +50,7 @@ const deleteProduct = async (id) => {
 };
 
 module.exports = {
+    getProductByBrand,
     getAllProduct,
     createProduct,
     getProductById,

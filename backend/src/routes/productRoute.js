@@ -11,6 +11,10 @@ router.get('/', productController.getAllProduct);
 // [GET] localhost:3000/products/:id
 router.get('/:id', productController.getProductById);
 
+// Lấy sản phẩm theo hãng sản xuất
+// [GET] localhost:3000/products/brand
+router.post('/brand', productController.getProductsByBrand);
+
 // Thêm sản phẩm mới
 // [POST] localhost:3000/products
 router.post('/', productController.createProduct);
@@ -22,5 +26,7 @@ router.put('/:id', productController.updateProduct);
 // Xóa sản phẩm
 // [DELETE] localhost:3000/products/:id
 router.delete('/:id', productController.deleteProduct);
+
+
 
 module.exports = router;
