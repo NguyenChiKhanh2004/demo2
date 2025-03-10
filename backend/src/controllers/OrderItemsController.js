@@ -1,6 +1,5 @@
 
 const OrderItems = require('../models/orderItemsModel');
-const bcrypt = require('bcrypt');
 
 class OrderItemsController {
     async getAllOdersItems(req, res) {
@@ -16,7 +15,7 @@ class OrderItemsController {
             const NewOrderItems = req.body;
                     try {
                         const newOrderItems = await OrderItems.createOrderItems(NewOrderItems);
-                        res.status(200).json("User created successfully");
+                        res.status(200).json("NewOrderItems created successfully");
             
                     } catch (error) {
                         res.status(500).json({ message: error.message });
@@ -29,7 +28,7 @@ class OrderItemsController {
                     const updatedOrderItems = req.body;
                     try {
                         await OrderItems.updateOrderItems(id, updatedOrderItems);
-                        res.status(200).json({ message: "User updated successfully" });
+                        res.status(200).json({ message: "NewOrderItems updated successfully" });
                     } catch (error) {
                         res.status(500).json({ message: error.message });
        
@@ -39,7 +38,7 @@ class OrderItemsController {
         const { id } = req.params;
                 try {
                     await OrderItems.deleteOrderItems(id);
-                    res.status(200).json({ message: "User deleted successfully" });
+                    res.status(200).json({ message: "NewOrderItems deleted successfully" });
                 } catch (error) {
                     res.status(500).json({ message: error.message });
       

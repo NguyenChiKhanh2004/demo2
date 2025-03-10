@@ -1,5 +1,6 @@
 const User = require('../models/userModel');
 const bcrypt = require('bcrypt');
+const pool = require('../utils/connectDB');
 
 class UserController {
     async getAllUsers(req, res) {
@@ -10,18 +11,8 @@ class UserController {
             res.status(500).json({ message: error.message });
         }
     }
-    async createUsers(req, res) {
-        try{
-            const newUsers = req.body;
-            console.log(newUsers);
-            const Users = await User.createUser(newUsers);
-            res.status(200).json("Users created successfully");
-        }
-        catch (error) {
-            res.status(500).json({ message: error.message });
-        }
 
-    }
+    
     async login(req, res) {
         const { username, password } = req.body;
         try {
@@ -47,6 +38,21 @@ class UserController {
     }
     
 
+    async createUsers(req, res) {
+        try{
+            const newUsers = req.body;
+            console.log(newUsers);
+            const Users = await User.createUsers(newUsers);
+            res.status(200).json("Users created successfully");
+        }
+        catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+
+    }
+
+
+      
     async updateUsers(req, res) {
         try {
             const { id } = req.params;
@@ -74,8 +80,9 @@ class UserController {
             res.status(500).json({ message: error.message });
         }
     }
+    
 
-    // Xóa user
+     // Xóa user
     async deleteUsers(req, res){
         try {
             const { id } = req.params;

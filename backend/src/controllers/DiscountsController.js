@@ -1,5 +1,4 @@
 const Discounts = require('../models/discountsModel');
-const bcrypt = require('bcrypt');
 
 class DiscountsController {
     async getAllDiscounts(req, res) {
@@ -15,7 +14,7 @@ class DiscountsController {
          const NewDiscounts = req.body;
                 try {
                      const newDiscounts = await Discounts.createDiscounts(NewDiscounts);
-                     res.status(200).json("User created successfully");
+                     res.status(200).json("NewDiscounts created successfully");
          
                 } catch (error) {
                      res.status(500).json({ message: error.message });
@@ -29,7 +28,7 @@ class DiscountsController {
                 const updatedDiscounts = req.body;
                 try {
                     await Discounts.updateDiscounts(id, updatedDiscounts);
-                    res.status(200).json({ message: "User updated successfully" });
+                    res.status(200).json({ message: "NewDiscounts updated successfully" });
                 } catch (error) {
                     res.status(500).json({ message: error.message });}
        
@@ -39,7 +38,7 @@ class DiscountsController {
         const { id } = req.params;
                 try {
                     await Discounts.deleteDiscounts(id);
-                    res.status(200).json({ message: "User deleted successfully" });
+                    res.status(200).json({ message: "NewDiscounts deleted successfully" });
                 } catch (error) {
                     res.status(500).json({ message: error.message });}
       

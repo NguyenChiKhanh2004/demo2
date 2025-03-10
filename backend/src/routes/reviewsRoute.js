@@ -9,15 +9,15 @@ router.get('/', ReviewsController.getAllReviews);
 // [POST] localhost:300/reviews
 router.post('/', ReviewsController.createReviews)
 
-// Cập nhật user
+// Cập nhật reviews
 // [PUT] localhost:3000/reviews/:id
 router.put('/:id', ReviewsController.updateReviews);
 
-// Xóa user
+// Xóa reviews
 // [DELETE] localhost:3000/reviews/:id
 router.delete('/:id', ReviewsController.deleteReviews);
 
-// Lấy ra user theo user_id
+// Lấy ra reviews theo product id
 // [GET] localhost:3000/reviews/:id
 router.get('/:id', ReviewsController.getReviewsByProductId);
 

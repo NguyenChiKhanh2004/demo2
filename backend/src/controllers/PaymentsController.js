@@ -1,5 +1,4 @@
 const Payments = require('../models/paymentsModel');
-const bcrypt = require('bcrypt');
 
 class PaymentsController {
     async getAllPayments(req, res) {
@@ -14,8 +13,8 @@ class PaymentsController {
     async createPayments(req, res) {
          const newPayments = req.body;
                 try {
-                     const newPayments = await Payments.createPayments(newPayments);
-                     res.status(200).json("User created successfully");
+                     const NewPayments = await Payments.createPayments(newPayments);
+                     res.status(200).json("NewPayments created successfully");
          
                 } catch (error) {
                      res.status(500).json({ message: error.message });
@@ -28,7 +27,7 @@ class PaymentsController {
                     const updatedPayments = req.body;
                     try {
                         await Payments.updatePayments(id, updatedPayments);
-                        res.status(200).json({ message: "User updated successfully" });
+                        res.status(200).json({ message: "NewPayments updated successfully" });
                     } catch (error) {
                         res.status(500).json({ message: error.message });
        
@@ -38,7 +37,7 @@ class PaymentsController {
         const { id } = req.params;
                 try {
                     await Payments.deletePayments(id);
-                    res.status(200).json({ message: "User deleted successfully" });
+                    res.status(200).json({ message: "NewPayments deleted successfully" });
                 } catch (error) {
                     res.status(500).json({ message: error.message });
         
