@@ -2,7 +2,7 @@ const pool = require('../utils/connectDB');
 const brypt = require('bcrypt');
 
 const getAll = async () => {
-    const query = 'SELECT * FROM user'
+    const query = 'SELECT * FROM users'
     const [rows, fields] = await pool.execute(query);
     return rows;
 }
