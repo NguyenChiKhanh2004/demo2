@@ -66,6 +66,34 @@ class ProductVariantController {
             res.status(500).json({ message: error.message });
         }
     }
+
+
+    async getVariantByColor(req, res) {
+        try {
+            const { product_id, color_id } = req.body; // Lấy brand từ body JSON
+            if (!product_id || !color_id) {
+                return res.status(400).json({ message: "Vui lòng cung cấp product_id và color_id." });
+            }
+            const products = await ProductVariant.getProductByColor(product_id, color_id);
+            res.status(200).json(products);
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    }
+    async getVariantBymemory(req, res) {
+        try {
+            const { product_id, ram_id, rom_id } = req.body;
+            if (!product_id || !ram_id || !rom_id) {
+                return res.status(400).json({ message: "Vui lòng cung cấp product_id, ram_id và rom_id." });
+            }
+            const products = await ProductVariant.getProductByMemory(product_id, ram_id, rom_id);
+            res.status(200).json(products);
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    }
+
+
 }
 
 module.exports = new ProductVariantController();

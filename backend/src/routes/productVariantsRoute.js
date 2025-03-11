@@ -23,4 +23,15 @@ router.put('/:id', productVariantController.updateVariant);
 // [DELETE] localhost:3000/productVariants/:id
 router.delete('/:id', productVariantController.deleteVariant);
 
+
+
+//Lấy biến thể theo màu
+// [POST] localhost:3000/productVariants/color
+router.post('/color', productVariantController.getVariantByColor);
+
+//Lấy biến thể theo ram
+// [POST] localhost:3000/productVariants/ram
+router.post('/memory', productVariantController.getVariantBymemory);
+
+
 module.exports = router;

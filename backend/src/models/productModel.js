@@ -49,11 +49,18 @@ const deleteProduct = async (id) => {
     return result;
 };
 
+const searchProducts = async (name) => {
+    const query = 'SELECT * FROM products WHERE name LIKE ?;';
+    const [result] = await pool.execute(query, [`%${name}%`]); 
+    return result;
+};
+
 module.exports = {
     getProductByBrand,
     getAllProduct,
     createProduct,
     getProductById,
     updateProduct,
-    deleteProduct
+    deleteProduct,
+    searchProducts
 };

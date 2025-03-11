@@ -18,14 +18,14 @@ class ProductController {
             if (!brand) {
                 return res.status(400).json({ message: "Vui lòng cung cấp tên hãng sản xuất." });
             }
-    
+
             const products = await Product.getProductByBrand(brand);
             res.status(200).json(products);
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
     }
-    
+
 
     async createProduct(req, res) {
         const newProduct = req.body;
@@ -66,6 +66,20 @@ class ProductController {
         try {
             await Product.deleteProduct(id);
             res.status(200).json({ message: "Product deleted successfully" });
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    }
+
+
+    async searchProducts(req, res) {
+        try {
+            const { name } = req.body;
+            if (!name) {
+                return res.status(400).json({ message: "Vui lòng cung cấp name" });
+            }
+            const products = await Product.searchProducts(name);
+            res.status(200).json(products);
         } catch (error) {
             res.status(500).json({ message: error.message });
         }

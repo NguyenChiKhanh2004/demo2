@@ -27,6 +27,11 @@ router.put('/:id', productController.updateProduct);
 // [DELETE] localhost:3000/products/:id
 router.delete('/:id', productController.deleteProduct);
 
+// tìm kiếm sản phẩm
+// [POST] localhost:3000/products/search
+router.post('/search', productController.searchProducts);
+
+
 
 
 module.exports = router;

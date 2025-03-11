@@ -48,12 +48,48 @@ const deleteVariant = async (id) => {
     const [results] = await pool.execute(query, [id]);
     return results;
 };
+const getProductByColor = async (product_id, color_id) => {
+    const query = `
+        SELECT pv.id, pv.product_id, c.name AS color_name, r.size AS ram_size, ro.size AS rom_size, 
+               pv.sku, pv.price, pv.stock_status, pv.image_url, pv.created_at, pv.updated_at
+        FROM product_variants pv
+        JOIN colors c ON pv.color_id = c.id
+        JOIN rams r ON pv.ram_id = r.id
+        JOIN roms ro ON pv.rom_id = ro.id
+        WHERE pv.product_id = ? 
+        AND pv.color_id = ?;
+    `;
 
-module.exports = {
-    getProductById,
-    getAll,
-    createVariant,
-    checkVariant,
-    updateVariant,
-    deleteVariant
+    const [results] = await pool.execute(query, [product_id, color_id]);
+    return results;
 };
+const getProductByMemory = async (product_id, ram_id, rom_id) => {
+    const query = `
+            SELECT DISTINCT c.id AS color_id, c.name AS color_name
+            FROM product_variants pv
+            JOIN colors c ON pv.color_id = c.id
+            WHERE pv.product_id = ?
+            AND pv.ram_id = ?
+            AND pv.rom_id = ?
+            AND pv.stock_status = 'in_stock';
+        `;
+
+        const [results] = await pool.execute(query, [product_id, ram_id, rom_id]);
+    return results;
+}
+
+
+
+
+
+
+    module.exports = {
+        getProductById,
+        getAll,
+        createVariant,
+        checkVariant,
+        updateVariant,
+        deleteVariant,
+        getProductByColor,
+        getProductByMemory
+    };
