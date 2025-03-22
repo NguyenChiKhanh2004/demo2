@@ -1,25 +1,24 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/UserController');
+const AuthMid = require('../middlewares/middleware');
 
 
-//lay tat ca user
+//Lấy tất cả user
 // [GET] localhost:3000/user
-router.get('/', userController.getAllUsers);
+router.get('/', AuthMid.authMiddleware , AuthMid.adminMiddleware ,userController.getAllUsers);
 
-//lay user theo id
 // [GET] localhost:3000/user
-router.get('/:id', userController.getUsersById);
+router.get('/:id',AuthMid.authMiddleware ,AuthMid.adminMiddleware ,userController.getUsersById);
 
 // [POST] localhost:300/user
-router.post('/', userController.createUsers)
+router.post('/',AuthMid.authMiddleware, AuthMid.adminMiddleware, userController.createUsers)
 
 //[POST] localhost:3000/user/login
 router.post('/login', userController.login)
 
-// Cập nhật user
 // [PUT] localhost:3000/user/:id
-router.put('/:id', userController.updateUsers);
+router.put('/:id',AuthMid.authMiddleware,AuthMid.adminMiddleware, userController.updateUsers);
 
 // Xóa user
 // [DELETE] localhost:3000/user/:id

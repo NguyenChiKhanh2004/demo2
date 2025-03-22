@@ -18,14 +18,11 @@ const AppRoutes = () => {
       <Route path="/login" element={<Login/>} />
       <Route path="/admin" element={<Admin/>} />
       
-
-      {/* Nested Routes */}
       <Route path="/dashboard" element={<DashboardLayout />}>
         <Route path="users" element={<Users />} />
         <Route path="settings" element={<Settings />} />
       </Route>
-
-      {/* Route không tìm thấy */}
+      
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

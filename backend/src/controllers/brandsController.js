@@ -1,82 +1,70 @@
 const brands = require('../models/brandsModel');
-const bcrypt = require('bcrypt');
-const pool = require('../utils/connectDB');
 
 class BrandsController {
     async getAllBrands(req, res) {
-          try {
-                    const Brands = await brands.getAllBrands();
-                    res.status(200).json(Brands);
-                }
-            catch (error) {
-                    res.status(500).json({ message: error.message });
-                }
+        try {
+            const allBrands = await brands.getAllBrands();
+            res.status(200).json(allBrands);
+        } catch (error) {
+            res.status(500).json({ message: error.message });
         }
+    }
 
     async createBrands(req, res) {
-        const newBrands = req.body;
+        const newBrand = req.body;
         try {
-            const Brands = await brands.createBrands(newBrands);
-            res.status(200).json("Brands created successfully");
+            await brands.createBrands(newBrand);
+            res.status(200).json("Brand created successfully");
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
-        
     }
 
-    // async login(req, res) {
-       
-        
-    // }
-    
-    // Cập nhật user
-    async updateBrands(req, res){
+    async updateBrands(req, res) {
         try {
             const { id } = req.params;
-            console.log(id);
-            const { name } = req.body;
-            const [result] = await pool.execute("UPDATE brands SET name = ? WHERE id = ?", [name,id]);
-        if (result.affectedRows === 0) {
-            return res.status(400).json({ message: "Brands not exits" });
-        }
-        res.json({ message: "Brands update successfull!" });
-        
+            const updatedBrand = req.body;
+            const result = await brands.updateBrands(id, updatedBrand);
+
+            if (result.affectedRows === 0) {
+                return res.status(400).json({ message: "Brand does not exist" });
+            }
+
+            res.json({ message: "Brand updated successfully!" });
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
     }
 
-     // Xóa user
-    async deleteBrands(req, res){
-       try {
-        const { id } = req.params;
-        const [result] = await pool.execute("DELETE FROM brands WHERE id = ?", [id]);
-        if (result.affectedRows === 0) {
-            return res.status(400).json({ message: "Brands not exits" });
+    async deleteBrands(req, res) {
+        try {
+            const { id } = req.params;
+            const result = await brands.deleteBrands(id);
+
+            if (result.affectedRows === 0) {
+                return res.status(400).json({ message: "Brand does not exist" });
+            }
+
+            res.json({ message: "Brand deleted successfully!" });
+        } catch (error) {
+            res.status(500).json({ message: error.message });
         }
-        res.json({ message: "Brands delete successfull!" });
     }
-    catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-    }
+
     async getBrandsById(req, res) {
         try {
             const { id } = req.params;
-            const brand = await brands.getBrandsById(id); // Đổi biến thành `brand` cho đúng số ít
-    
+            const brand = await brands.getBrandsById(id);
+
             if (!brand) {
                 return res.status(404).json({ message: "Brand not found" });
             }
-    
+
             res.status(200).json(brand);
         } catch (error) {
-            res.status(500).json({ message: error.message }); // Bắt lỗi và trả về mã lỗi 500
+            res.status(500).json({ message: error.message });
         }
     }
-    
-        
-    
 }
 
 module.exports = new BrandsController();

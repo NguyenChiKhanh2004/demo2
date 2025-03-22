@@ -8,29 +8,39 @@ const getAll = async () => {
 }
 
 const checkuser = async (username) => {
-    const query = 'SELECT * FROM users WHERE username = ?';
+    const query = 'SELECT * FROM users WHERE phone = ?';
     const [rows, fields] = await pool.execute(query, [username]);
     return rows;
 }
 
-
-
 const createUsers = async (newUsers) => {
-    const { username, password, email, phone, full_name, role, status} = newUsers;
+    const { phone, password, email, full_name, role, status } = newUsers;
     console.log(newUsers);
     const newpass = await bcrypt.hash(password, 10);
-    const query = 'INSERT INTO users (USERNAME, PASSWORD, EMAIL, PHONE, FULL_NAME, ROLE , STATUS) VALUES (?, ?, ?,?,?,?,?)';
-    const result = await pool.execute(query, [username, newpass, email, phone, full_name, role, status]);
+    const query = 'INSERT INTO users (phone, password, email, full_name, role, status) VALUES (?, ?, ?, ?, ?, ?)';
+    const result = await pool.execute(query, [phone, newpass, email, full_name, role, status]);
     return result[0];
 };
 
 
 
-const updateUsers = async()=>{
-  const query = " UPDATE users SET USERNAME = ?, PASSWORD = ?, EMAIL = ?, PHONE = ?, FULL_NAME = ?, ROLE = ?, STATUS = ? WHERE id=?"
-    const [rows, fields] = await pool.execute(query);
+const updateUsers = async (id, updatedUser) => {
+    const { phone, password, email, full_name, role, status } = updatedUser;
+    const newpass = password ? await bcrypt.hash(password, 10) : undefined;
+    const query = `
+        UPDATE users 
+        SET 
+            phone = ?, 
+            password = COALESCE(?, password), 
+            email = ?, 
+            full_name = ?, 
+            role = ?, 
+            status = ? 
+        WHERE id = ?
+    `;
+    const [rows] = await pool.execute(query, [phone, newpass, email, full_name, role, status, id]);
     return rows;
-}
+};
 
 const deleteUsers =async()=>{
     const query = " DELETE FROM users WHERE id=?"
