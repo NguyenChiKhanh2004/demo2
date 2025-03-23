@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const productController = require('../controllers/ProductController');
+const AuthMid = require('../middlewares/middleware');
 
 
 //lay tat ca product
 // [GET] localhost:3000/product
-router.get('/', productController.getAllProduct);
+router.get('/',AuthMid.authMiddleware,AuthMid.adminMiddleware, productController.getAllProduct);
 
 // Lấy chi tiết sản phẩm theo ID
 // [GET] localhost:3000/products/:id

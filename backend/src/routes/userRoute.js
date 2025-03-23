@@ -22,6 +22,6 @@ router.put('/:id',AuthMid.authMiddleware,AuthMid.adminMiddleware, userController
 
 // Xóa user
 // [DELETE] localhost:3000/user/:id
-router.delete('/:id', userController.deleteUsers);
+router.delete('/:id',AuthMid.authMiddleware,AuthMid.adminMiddleware, userController.deleteUsers);
 
 module.exports = router;
