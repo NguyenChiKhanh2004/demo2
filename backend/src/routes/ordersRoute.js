@@ -15,7 +15,7 @@ router.put('/:id', OrdersController.updateOrders);
 
 // Xóa orders
 // [DELETE] localhost:3000/orders/:id
-router.delete('/:id', OrdersController.deleteROrders);
+router.delete('/:id', OrdersController.deleteOrders);
 
 // Lấy ra orders theo user_id
 // [GET] localhost:3000/orders/:id

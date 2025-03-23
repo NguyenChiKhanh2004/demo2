@@ -1,12 +1,10 @@
 const Product = require('../models/productModel');
 
-
 class ProductController {
     async getAllProduct(req, res) {
-
         try {
-            const Products = await Product.getAllProduct();
-            res.status(200).json(Products);
+            const products = await Product.getIdNamePriceImage();
+            res.status(200).json(products);
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
@@ -14,7 +12,7 @@ class ProductController {
 
     async getProductsByBrand(req, res) {
         try {
-            const { brand } = req.body; // Lấy brand từ body JSON
+            const { brand } = req.body; // Get brand from JSON body
             if (!brand) {
                 return res.status(400).json({ message: "Vui lòng cung cấp tên hãng sản xuất." });
             }
@@ -25,7 +23,6 @@ class ProductController {
             res.status(500).json({ message: error.message });
         }
     }
-
 
     async createProduct(req, res) {
         const newProduct = req.body;
@@ -70,7 +67,6 @@ class ProductController {
             res.status(500).json({ message: error.message });
         }
     }
-
 
     async searchProducts(req, res) {
         try {

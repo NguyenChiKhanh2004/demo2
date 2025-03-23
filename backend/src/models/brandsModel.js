@@ -1,6 +1,4 @@
-
 const pool = require('../utils/connectDB');
-const bcrypt = require('bcrypt');
 
 const getAllBrands = async () => {
     const query = 'SELECT * FROM brands';
@@ -8,30 +6,25 @@ const getAllBrands = async () => {
     return rows;
 };
 
-
-    const createBrands = async (newBrands) => {
-        const { name } = newBrands;
-        const query = 'INSERT INTO brands (NAME) VALUES (?)';
-        const result = await pool.execute(query, [name,]);
-        return result[0];
+const createBrands = async (newBrands) => {
+    const { name } = newBrands;
+    const query = 'INSERT INTO brands (NAME) VALUES (?)';
+    const [result] = await pool.execute(query, [name]);
+    return result;
 };
 
-// const checkDienthoai = async (username) => {
-   
-// };
+const updateBrands = async (id, updatedBrand) => {
+    const { name } = updatedBrand;
+    const query = 'UPDATE brands SET NAME = ? WHERE id = ?';
+    const [result] = await pool.execute(query, [name, id]);
+    return result;
+};
 
-const updateBrands = async()=>{
-    const query = " UPDATE brands SET NAME = ?WHERE id=?"
-    const [rows, fields] = await pool.execute(query);
-    return rows;
-
-}
-
-const deleteBrands =async()=>{
-    const query = " DELETE FROM brands WHERE id=?"
-    const [rows, fields] = await pool.execute(query);
-    return rows;
-}
+const deleteBrands = async (id) => {
+    const query = 'DELETE FROM brands WHERE id = ?';
+    const [result] = await pool.execute(query, [id]);
+    return result;
+};
 
 const getBrandsById = async (id) => {
     const query = 'SELECT * FROM brands WHERE id = ?';
@@ -39,8 +32,10 @@ const getBrandsById = async (id) => {
     return rows[0];
 };
 
-
-
 module.exports = {
-    getAllBrands, createBrands, updateBrands, deleteBrands,getBrandsById
+    getAllBrands,
+    createBrands,
+    updateBrands,
+    deleteBrands,
+    getBrandsById
 };

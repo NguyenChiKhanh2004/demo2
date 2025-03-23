@@ -18,7 +18,7 @@ class UserController {
         try {
             const user = await User.checkuser(phone);
             if (user.length === 0) {
-                return res.status(400).json({ message: "Username không tồn tại" });
+                return res.status(400).json({ message: "Tài khoản không tồn tại" });
             }
             const checkpass = await bcrypt.compare(password, user[0].password);
             if (!checkpass) {
@@ -27,9 +27,10 @@ class UserController {
             const currrentUser = {
                 phone: user[0].phone,
                 email: user[0].email,
-                role: user[0].role
+                role: user[0].role,
+                fullname: user[0].full_name
             };
-            const accessToken = auth.genrateAccessToken(currrentUser);
+            const accessToken = auth.generateAccessToken(currrentUser);
             res.status(200).json({ accessToken });
     
         } catch (error) {
